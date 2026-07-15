@@ -1,0 +1,173 @@
+{
+info: {
+  title: "Pom Equipment API"
+  version: "1.0.0"
+  description: "OpenAPI definition for the Pom Equipment service."
+},
+servers:
+  - url: "https://pomerleaudev.test.apimanagement.ca10.hana.ondemand.com/EquipmentRead"
+    description: "Production server"
+paths:
+  /Equipment?$top=1000&$expand=_CompanyCode($select=CompanyCodeName),_EquipmentText($select=EquipmentName;$filter=Language%20eq%20%27EN%27),_MasterFixedAsset($select=MasterFixedAssetDescription),_Supplier($select=SupplierFullName),_TechnicalObjectTypeText($select=TechnicalObjectTypeDesc;$filter=Language%20eq%20%27EN%27),_WBSElement($select=WBSElement,WBSDescription):
+    get:
+      summary: "Retrieve equipment records"
+      description: "Returns a list of equipment records in the OData-style envelope."
+      responses:
+        "200":
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EquipmentListResponse"
+    post:
+      summary: "Create equipment records"
+      description: "Creates new equipment records and returns the created records."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EquipmentListRequest"
+      responses:
+        "201":
+          description: "Resource created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EquipmentListResponse"
+components:
+  schemas:
+    EquipmentListRequest:
+      type: object
+      properties:
+        "@odata.context":
+          type: string
+        "@odata.metadataEtag":
+          type: string
+        value:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentRecord"
+      required:
+        - value
+    EquipmentListResponse:
+      type: object
+      properties:
+        "@odata.context":
+          type: string
+        "@odata.metadataEtag":
+          type: string
+        value:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentRecord"
+      required:
+        - "@odata.context"
+        - "@odata.metadataEtag"
+        - value
+    EquipmentRecord:
+      type: object
+      properties:
+        Equipment:
+          type: string
+        MaintObjectInternalID:
+          type: string
+        TechnicalObjectType:
+          type: string
+        AssetManufacturerName:
+          type: string
+        ManufacturerPartTypeName:
+          type: string
+        ManufacturerPartNmbr:
+          type: string
+        ManufacturerSerialNumber:
+          type: string
+        InventoryNumber:
+          type: string
+        GrossWeight:
+          type: integer
+        GrossWeightUnit:
+          type: string
+        SizeOrDimensionText:
+          type: string
+        MaintObjectLocAcctAssgmtNmbr:
+          type: string
+        MaintenancePlanningPlant:
+          type: string
+        MaintenancePlannerGroup:
+          type: string
+        CompanyCode:
+          type: string
+        IsDeleted:
+          type: boolean
+        TechObjStatusIsInactive:
+          type: boolean
+        PurchaseOrder:
+          type: string
+        Supplier:
+          type: string
+        RealEstateContract:
+          type: string
+        WBSElementInternalID:
+          type: string
+        MasterFixedAsset:
+          type: string
+        _CompanyCode:
+          type: string
+          nullable: true
+        _EquipmentText:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentText"
+        _MasterFixedAsset:
+          type: string
+          nullable: true
+        _Supplier:
+          type: string
+          nullable: true
+        _TechnicalObjectTypeText:
+          type: array
+          items:
+            type: string
+        _WBSElement:
+          type: string
+          nullable: true
+      required:
+        - Equipment
+        - MaintObjectInternalID
+        - TechnicalObjectType
+        - AssetManufacturerName
+        - ManufacturerPartTypeName
+        - ManufacturerPartNmbr
+        - ManufacturerSerialNumber
+        - InventoryNumber
+        - GrossWeight
+        - GrossWeightUnit
+        - SizeOrDimensionText
+        - MaintObjectLocAcctAssgmtNmbr
+        - MaintenancePlanningPlant
+        - MaintenancePlannerGroup
+        - CompanyCode
+        - IsDeleted
+        - TechObjStatusIsInactive
+        - PurchaseOrder
+        - Supplier
+        - RealEstateContract
+        - WBSElementInternalID
+        - MasterFixedAsset
+        - _EquipmentText
+        - _TechnicalObjectTypeText
+    EquipmentText:
+      type: object
+      properties:
+        Equipment:
+          type: string
+        Language:
+          type: string
+        EquipmentName:
+          type: string
+      required:
+        - Equipment
+        - Language
+        - EquipmentName
+}
