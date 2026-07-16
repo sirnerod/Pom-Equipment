@@ -9,15 +9,24 @@
   "schemes": [
     "https"
   ],
-  "consumes": [
-    "application/json"
-  ],
   "produces": [
     "application/json"
   ],
   "paths": {
     "/EquipmentRead/Equipment": {
       "get": {
+        "summary": "Retrieve equipment records",
+        "description": "Returns a list of equipment records",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/EquipmentListResponse"
+            }
+          }
+        }
+      },
+       "post": {
         "summary": "Retrieve equipment records",
         "description": "Returns a list of equipment records",
         "responses": {
