@@ -17,6 +17,25 @@
       "get": {
         "summary": "Retrieve equipment records",
         "description": "Returns a list of equipment records",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return",
+            "required": false,
+            "type": "integer",
+            "default": 1000,
+            "format": "int32"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "OData expand clause",
+            "required": false,
+            "type": "string",
+            "default": "_CompanyCode($select=CompanyCodeName),_EquipmentText($select=EquipmentName;$filter=Language eq 'EN'),_MasterFixedAsset($select=MasterFixedAssetDescription),_Supplier($select=SupplierFullName),_TechnicalObjectTypeText($select=TechnicalObjectTypeDesc;$filter=Language eq 'EN'),_WBSElement($select=WBSElement,WBSDescription)"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
