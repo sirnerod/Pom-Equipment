@@ -6,7 +6,7 @@
     "title": "Pom Equipment API"
   },
   "host": "pomerleaudev.test.apimanagement.ca10.hana.ondemand.com",
-  "basePath": "/EquipmentRead",
+  
   "schemes": [
     "https"
   ],
@@ -17,7 +17,7 @@
     "application/json"
   ],
   "paths": {
-    "/Equipment": {
+    "/EquipmentRead/Equipment": {
       "get": {
         "summary": "Retrieve equipment records",
         "description": "Returns a list of equipment records in the OData-style envelope.",
