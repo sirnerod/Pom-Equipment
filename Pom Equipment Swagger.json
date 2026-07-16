@@ -6,7 +6,6 @@
     "title": "Pom Equipment API"
   },
   "host": "pomerleaudev.test.apimanagement.ca10.hana.ondemand.com",
-  
   "schemes": [
     "https"
   ],
@@ -20,51 +19,10 @@
     "/EquipmentRead/Equipment": {
       "get": {
         "summary": "Retrieve equipment records",
-        "description": "Returns a list of equipment records in the OData-style envelope.",
-        "parameters": [
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Maximum number of records to return",
-            "required": false,
-            "type": "integer",
-            "default": 1000,
-            "format": "int32"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "OData expand clause",
-            "required": false,
-            "type": "string",
-            "default": "_CompanyCode($select=CompanyCodeName),_EquipmentText($select=EquipmentName;$filter=Language eq 'EN'),_MasterFixedAsset($select=MasterFixedAssetDescription),_Supplier($select=SupplierFullName),_TechnicalObjectTypeText($select=TechnicalObjectTypeDesc;$filter=Language eq 'EN'),_WBSElement($select=WBSElement,WBSDescription)"
-          }
-        ],
+        "description": "Returns a list of equipment records",
         "responses": {
           "200": {
             "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/EquipmentListResponse"
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create equipment records",
-        "description": "Creates new equipment records and returns the created records.",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EquipmentListRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Resource created",
             "schema": {
               "$ref": "#/definitions/EquipmentListResponse"
             }
