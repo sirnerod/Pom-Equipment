@@ -1,0 +1,250 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Swagger 2.0 definition for the Pom Equipment service.",
+    "version": "1.0.0",
+    "title": "Pom Equipment API"
+  },
+  "host": "pomerleauprd.apimanagement.ca10.hana.ondemand.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/EquipmentRead/Equipment": {
+      "get": {
+        "summary": "Retrieve equipment records",
+        "description": "Returns a list of equipment records",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return",
+            "required": false,
+            "type": "integer",
+            "default": 1000,
+            "format": "int32"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "OData expand clause",
+            "required": false,
+            "type": "string",
+            "default": "_CompanyCode($select=CompanyCodeName),_EquipmentText($select=EquipmentName;$filter=Language eq 'EN'),_MasterFixedAsset($select=MasterFixedAssetDescription),_Supplier($select=SupplierFullName),_TechnicalObjectTypeText($select=TechnicalObjectTypeDesc;$filter=Language eq 'EN'),_WBSElement($select=WBSElement,WBSDescription)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/EquipmentListResponse"
+            }
+          }
+        }
+      },
+       "post": {
+        "summary": "Retrieve equipment records",
+        "description": "Returns a list of equipment records",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/EquipmentListResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EquipmentListRequest": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "@odata.metadataEtag": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EquipmentRecord"
+          }
+        }
+      }
+    },
+    "EquipmentListResponse": {
+      "type": "object",
+      "required": [
+        "@odata.context",
+        "@odata.metadataEtag",
+        "value"
+      ],
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "@odata.metadataEtag": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EquipmentRecord"
+          }
+        }
+      }
+    },
+    "EquipmentRecord": {
+      "type": "object",
+      "required": [
+        "AssetManufacturerName",
+        "CompanyCode",
+        "Equipment",
+        "GrossWeight",
+        "GrossWeightUnit",
+        "InventoryNumber",
+        "IsDeleted",
+        "MaintObjectInternalID",
+        "MaintObjectLocAcctAssgmtNmbr",
+        "MaintenancePlannerGroup",
+        "MaintenancePlanningPlant",
+        "ManufacturerPartNmbr",
+        "ManufacturerPartTypeName",
+        "ManufacturerSerialNumber",
+        "MasterFixedAsset",
+        "PurchaseOrder",
+        "RealEstateContract",
+        "SizeOrDimensionText",
+        "Supplier",
+        "TechObjStatusIsInactive",
+        "TechnicalObjectType",
+        "WBSElementInternalID",
+        "_EquipmentText",
+        "_TechnicalObjectTypeText"
+      ],
+      "properties": {
+        "Equipment": {
+          "type": "string"
+        },
+        "MaintObjectInternalID": {
+          "type": "string"
+        },
+        "TechnicalObjectType": {
+          "type": "string"
+        },
+        "AssetManufacturerName": {
+          "type": "string"
+        },
+        "ManufacturerPartTypeName": {
+          "type": "string"
+        },
+        "ManufacturerPartNmbr": {
+          "type": "string"
+        },
+        "ManufacturerSerialNumber": {
+          "type": "string"
+        },
+        "InventoryNumber": {
+          "type": "string"
+        },
+        "GrossWeight": {
+          "type": "integer"
+        },
+        "GrossWeightUnit": {
+          "type": "string"
+        },
+        "SizeOrDimensionText": {
+          "type": "string"
+        },
+        "MaintObjectLocAcctAssgmtNmbr": {
+          "type": "string"
+        },
+        "MaintenancePlanningPlant": {
+          "type": "string"
+        },
+        "MaintenancePlannerGroup": {
+          "type": "string"
+        },
+        "CompanyCode": {
+          "type": "string"
+        },
+        "IsDeleted": {
+          "type": "boolean"
+        },
+        "TechObjStatusIsInactive": {
+          "type": "boolean"
+        },
+        "PurchaseOrder": {
+          "type": "string"
+        },
+        "Supplier": {
+          "type": "string"
+        },
+        "RealEstateContract": {
+          "type": "string"
+        },
+        "WBSElementInternalID": {
+          "type": "string"
+        },
+        "MasterFixedAsset": {
+          "type": "string"
+        },
+        "_CompanyCode": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_EquipmentText": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EquipmentText"
+          }
+        },
+        "_MasterFixedAsset": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_Supplier": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_TechnicalObjectTypeText": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "_WBSElement": {
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "EquipmentText": {
+      "type": "object",
+      "required": [
+        "Equipment",
+        "EquipmentName",
+        "Language"
+      ],
+      "properties": {
+        "Equipment": {
+          "type": "string"
+        },
+        "Language": {
+          "type": "string"
+        },
+        "EquipmentName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
